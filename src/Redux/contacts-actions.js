@@ -21,4 +21,5 @@ export const delteContactsSuccess = createAction(
 export const delteContactsError = createAction('contacts/delteContactsError');
 
 export const errorTypeSuccess = createAction('contacts/errorTypeSuccess');
-export const changeFilter = createAction('action/change-filter');
+
+export const changeFilter = createAction('contacts/changeFilter');

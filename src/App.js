@@ -1,46 +1,29 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import ContactForm from './Phonebook/ContactForm';
 import ContactList from './Phonebook/ContactList';
 import Filter from './Phonebook/Filter';
-import Loader from './loader/Loader';
+import Loader from './Component/Container';
 import { contactsSelectors } from './Redux';
-import Container from './Container';
-import Modal from './Modal';
+import Container from './Component/Container';
 import '../src/bases.css';
 
-class App extends Component {
-  state = {
-    isModalOpen: false,
-  };
+const App = ({ isLoadingContacts }) => {
+  return (
+    <>
+      <div>
+        <Container>
+          <ContactForm />
+          <Filter />
+          <ContactList />
+          {isLoadingContacts && <Loader />}
+        </Container>
+      </div>
+    </>
+  );
+};
 
-  toogleModal = () => {
-    this.setState(({ isModalOpen }) => ({
-      isModalOpen: !isModalOpen,
-    }));
-  };
-
-  render() {
-    const { isModalOpen } = this.state;
-    const { error } = this.props;
-    const showSpinner = this.props.isLoadingContacts && <Loader />;
-    return (
-      <>
-        <div>
-          <Container>
-            {error && !isModalOpen && (
-              <Modal error={error} onClose={this.toogleModal} />
-            )}
-            <ContactForm />
-            <Filter />
-            <ContactList />
-            {showSpinner}
-          </Container>
-        </div>
-      </>
-    );
-  }
-}
+App.propTypes = {};
 
 const mapStateToProps = state => ({
   isLoadingContacts: contactsSelectors.loading(state),

@@ -113,16 +113,16 @@ class ContactForm extends Component {
     );
   }
 }
-ContactForm.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      number: PropTypes.string,
-      handleChange: PropTypes.func,
-      id: PropTypes.number,
-    }),
-  ),
-};
+// // ContactForm.propTypes = {
+// //   contacts: PropTypes.arrayOf(
+// //     PropTypes.shape({
+// //       name: PropTypes.string,
+// //       number: PropTypes.string,
+// //       handleChange: PropTypes.func,
+// //       id: PropTypes.number,
+// //     }),
+// //   ),
+// // };
 
 const mapStateToProps = state => ({
   contacts: contactsSelectors.items(state),
@@ -133,4 +133,5 @@ const mapDispatchToProps = dispatch => ({
     dispatch(contactsOperations.addContact({ name, number })),
   fetch: () => dispatch(contactsOperations.fetchContacts()),
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

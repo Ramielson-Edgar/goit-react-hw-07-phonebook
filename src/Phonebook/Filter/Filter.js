@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import s from './Filter.module.css';
 import Appearances from '../Filter/FilterAppearances.module.css';
-import { contactsOperations, contactsSelectors } from '../../Redux';
+import { contactsSelectors } from '../../Redux';
+import * as action from '../../Redux/contacts-actions';
 
-const Filter = ({ value, onChange, contacts }) => {
+const Filter = ({ value, onChange, items }) => {
   return (
     <>
       <CSSTransition
-        in={contacts.length > 1}
+        in={items.length > 1}
         timeout={250}
         classNames={Appearances}
         unmountOnExit
@@ -36,11 +37,11 @@ Filter.propTypes = {
 
 const mapStateToProps = state => ({
   value: contactsSelectors.getFilter(state),
-  contacts: contactsSelectors.items(state),
+  items: contactsSelectors.items(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onChange: e => dispatch(contactsOperations.changeFilter(e.target.value)),
+  onChange: e => dispatch(action.changeFilter(e.target.value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

@@ -42,9 +42,9 @@ const erroTypeMessage = error => ({
   payload: error,
 });
 
-const changeFilter = text => ({
+const changeFilter = value => ({
   type: action.changeFilter,
-  payload: text,
+  payload: value,
 });
 
 export default {

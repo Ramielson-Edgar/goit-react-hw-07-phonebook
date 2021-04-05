@@ -7,13 +7,21 @@ const error = state => state.contacts.error;
 
 const getVisibleContacts = createSelector(
   [items, getFilter],
-  (allitems, filter) => {
-    const normalizer = filter.toLowerCase();
+  (allContacts, filter) => {
+    const mormalizerFilter = filter.toLowerCase();
 
-    return allitems.filter(({ name }) =>
-      name.toLowerCase().includes(normalizer),
+    return allContacts.filter(({ name }) =>
+      name.toLowerCase().includes(mormalizerFilter),
     );
   },
 );
 
-export default { loading, items, getVisibleContacts, getFilter, error };
+const selectors = {
+  loading,
+  items,
+  getVisibleContacts,
+  getFilter,
+  error,
+};
+
+export default selectors;
